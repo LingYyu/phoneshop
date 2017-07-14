@@ -1,0 +1,259 @@
+<div class="col-sm-12">
+    <div class="col-sm-2">
+        <div class="order_menu"><span>≡</span> <span>订单管理</span></div>
+        <div class="order_menu_detail">
+            <span>订单跟踪与查询</span>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="detail">
+            <div class="detail_header">
+                <span>订单列表</span>
+            </div>
+            <div class="order_detail_body">
+              <form class="form-horizontal showcase-form" role="form" name="search_form" novalidate>
+                <div class="order_num fl">
+                    <label for="">订单编号</label>
+                    <input ng-model="ordersModel.searchForm.orderid" type="text" name="" value="" ng-pattern="/^[0-9]/" ng-maxlength="13">
+                </div>
+                <div class="order_time fl">
+                    <label for="">订单时间</label>
+                    <input type="text" ng-model="ordersModel.searchForm.ordertime" id="date">
+                </div>
+                <button class="btn btn-xiajia fl" ng-click="ordersModel.findOrder()">查询</button>
+              </form>
+            </div>
+            <div class="order_detail_menu fl" id="allOrderMenu">
+                <ul>
+                    <li class="active" ng-click="ordersModel.all()">全部订单</li>
+                    <li ng-click="ordersModel.wait()">等待发货</li>
+                    <li ng-click="ordersModel.onroad()">已发货</li>
+                    <li ng-click="ordersModel.check()">已收货</li>
+                </ul>
+            </div>
+            <div class="order_all" id="allOrder">
+                <div class="orders" id="all">
+                    <div class="myorder-header">
+                        <table class="header-table">
+                            <tbody>
+                                <tr>
+                                    <td class="baobei">宝贝</td>
+                                    <td class="danjia">单价</td>
+                                    <td class="shuliang">数量</td>
+                                    <td class="danjia">商品操作</td>
+                                    <td class="danjia">实付款</td>
+                                    <td class="danjia">交易状态</td>
+                                    <td class="danjia">交易操作</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="myorder-page">
+                        <div class="order_page fr">
+                            <button type="button" name="button">上一页</button>
+                            <button type="button" name="button">下一页</button>
+                        </div>
+                    </div>
+                    <div class="myorder-content" ng-repeat="orders in ordersModel.orderlist">
+                        <div class="myorder-content-table">
+                            <table class="content-table">
+                                <thead>
+                                    <th class="baobei" colspan="7">{{orders[0].ordertime}} 订单号:{{orders[0].orderid}} </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="order in orders track by $index">
+                                        <td class="baobei" style="text-align:left;"><img ng-src="{{order.picture}} " alt=""><span>{{order.name}} {{order.producttype}} </span></td>
+                                        <td class="danjia">{{order.price |currency :"¥"}} </td>
+                                        <td class="shuliang">{{order.num}}</td>
+                                        <td class="danjia">退款/退货</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{orders.length}}" valign="top">{{order.allprice |currency :"¥"}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{orders.length}}" valign="top">{{order.status}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{orders.length}}" valign="top">
+                                            <button type="button" name="button" ng-click="ordersModel.allStatus(orders[0].orderid,order.status)">{{order.changestatus}}</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="orders hide" id="wait">
+                    <div class="myorder-header">
+                        <table class="header-table">
+                            <tbody>
+                                <tr>
+                                    <td class="baobei">宝贝</td>
+                                    <td class="danjia">单价</td>
+                                    <td class="shuliang">数量</td>
+                                    <td class="danjia">商品操作</td>
+                                    <td class="danjia">实付款</td>
+                                    <td class="danjia">交易状态</td>
+                                    <td class="danjia">交易操作</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="myorder-page">
+                        <div class="order_page fr">
+                            <button type="button" name="button">上一页</button>
+                            <button type="button" name="button">下一页</button>
+                        </div>
+                    </div>
+                    <div class="myorder-content" ng-repeat="waitlist in ordersModel.waitlist">
+                        <div class="myorder-content-table">
+                            <table class="content-table">
+                                <thead>
+                                    <th class="baobei" colspan="7">{{waitlist[0].ordertime}} 订单号:{{waitlist[0].orderid}} </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="wait in waitlist track by $index">
+                                        <td class="baobei" style="text-align:left;"><img ng-src="{{wait.picture}} " alt=""><span>{{wait.name}} {{wait.producttype}} </span></td>
+                                        <td class="danjia">{{wait.price |currency :"¥"}} </td>
+                                        <td class="shuliang">{{wait.num}}</td>
+                                        <td class="danjia">退款/退货</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{waitlist.length}}" valign="top">{{wait.allprice |currency :"¥"}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{waitlist.length}}" valign="top">{{wait.status}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{waitlist.length}}" valign="top">
+                                            <button type="button" name="button" ng-click="ordersModel.sendTo(waitlist[0].orderid)">{{wait.changestatus}}</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="orders hide" id="onroad">
+                    <div class="myorder-header">
+                        <table class="header-table">
+                            <tbody>
+                                <tr>
+                                    <td class="baobei">宝贝</td>
+                                    <td class="danjia">单价</td>
+                                    <td class="shuliang">数量</td>
+                                    <td class="danjia">商品操作</td>
+                                    <td class="danjia">实付款</td>
+                                    <td class="danjia">交易状态</td>
+                                    <td class="danjia">交易操作</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="myorder-page">
+                        <div class="order_page fr">
+                            <button type="button" name="button">上一页</button>
+                            <button type="button" name="button">下一页</button>
+                        </div>
+                    </div>
+                    <div class="myorder-content" ng-repeat="paylist in ordersModel.paylist">
+                        <div class="myorder-content-table">
+                            <table class="content-table">
+                                <thead>
+                                    <th class="baobei" colspan="7">{{paylist[0].ordertime}} 订单号:{{paylist[0].orderid}} </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="pay in paylist track by $index">
+                                        <td class="baobei" style="text-align:left;"><img ng-src="{{pay.picture}} " alt=""><span>{{pay.name}} {{pay.producttype}} </span></td>
+                                        <td class="danjia">{{pay.price |currency :"¥"}} </td>
+                                        <td class="shuliang">{{pay.num}}</td>
+                                        <td class="danjia">退款/退货</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{paylist.length}}" valign="top">{{pay.allprice |currency :"¥"}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{paylist.length}}" valign="top">{{pay.status}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{paylist.length}}" valign="top">
+                                            <button type="button" name="button">{{pay.changestatus}}</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="orders hide" id="check">
+                    <div class="myorder-header">
+                        <table class="header-table">
+                            <tbody>
+                                <tr>
+                                    <td class="baobei">宝贝</td>
+                                    <td class="danjia">单价</td>
+                                    <td class="shuliang">数量</td>
+                                    <td class="danjia">商品操作</td>
+                                    <td class="danjia">实付款</td>
+                                    <td class="danjia">交易状态</td>
+                                    <td class="danjia">交易操作</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="myorder-page">
+                        <div class="order_page fr">
+                            <button type="button" name="button">上一页</button>
+                            <button type="button" name="button">下一页</button>
+                        </div>
+                    </div>
+                    <div class="myorder-content" ng-repeat="checklist in ordersModel.checklist">
+                        <div class="myorder-content-table">
+                            <table class="content-table">
+                                <thead>
+                                    <th class="baobei" colspan="7">{{checklist[0].ordertime}} 订单号:{{checklist[0].orderid}} </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="check in checklist track by $index">
+                                        <td class="baobei" style="text-align:left;"><img ng-src="{{check.picture}} " alt=""><span>{{check.name}} {{check.producttype}} </span></td>
+                                        <td class="danjia">{{check.price |currency :"¥"}} </td>
+                                        <td class="shuliang">{{check.num}}</td>
+                                        <td class="danjia">退款/退货</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{checklist.length}}" valign="top">{{check.allprice |currency :"¥"}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{checklist.length}}" valign="top">{{check.status}}</td>
+                                        <td class="danjia zonge" ng-if="$index ==0" rowspan="{{checklist.length}}" valign="top">
+                                            <button type="button" name="button">{{check.changestatus}}</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hide" id="searchOrder">
+              <div class="myorder-header">
+                  <table class="header-table">
+                      <tbody>
+                          <tr>
+                              <td class="baobei">宝贝</td>
+                              <td class="danjia">单价</td>
+                              <td class="shuliang">数量</td>
+                              <td class="danjia">商品操作</td>
+                              <td class="danjia">实付款</td>
+                              <td class="danjia">交易状态</td>
+                              <td class="danjia">交易操作</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="myorder-page">
+                  <div class="order_page fr">
+                      <button type="button" name="button">上一页</button>
+                      <button type="button" name="button">下一页</button>
+                  </div>
+              </div>
+              <div class="myorder-content" ng-repeat="searchDetail in ordersModel.searchDetail">
+                  <div class="myorder-content-table">
+                      <table class="content-table">
+                          <thead>
+                              <th class="baobei" colspan="7">{{searchDetail[0].ordertime}} 订单号:{{searchDetail[0].orderid}} </th>
+                          </thead>
+                          <tbody>
+                              <tr ng-repeat="search in searchDetail track by $index">
+                                  <td class="baobei" style="text-align:left;"><img ng-src="{{search.picture}} " alt=""><span>{{search.name}} {{search.producttype}} </span></td>
+                                  <td class="danjia">{{search.price |currency :"¥"}} </td>
+                                  <td class="shuliang">{{search.num}}</td>
+                                  <td class="danjia">退款/退货</td>
+                                  <td class="danjia zonge" ng-if="$index ==0" rowspan="{{searchDetail.length}}" valign="top">{{search.allprice |currency :"¥"}}</td>
+                                  <td class="danjia zonge" ng-if="$index ==0" rowspan="{{searchDetail.length}}" valign="top">{{search.status}}</td>
+                                  <td class="danjia zonge" ng-if="$index ==0" rowspan="{{searchDetail.length}}" valign="top">
+                                      <button type="button" name="button">{{search.changestatus}}</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div order-send-tpl></div>

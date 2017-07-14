@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app="LoginApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>后台登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/supersized.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/login.js" ></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div class="page-container">
+        <h1><img src="../images/logo.png"></h1>
+        <form class="login-form" novalidate="novalidate">
+            <div class="login_icon">
+            <i class="icon icon_user"></i></div>
+            <input type="text" name="email" id="email" class="username"  placeholder="用户名">
+            <div class="login_icon">
+            <i class="icon icon_password"></i>
+            </div>
+            <input type="password" name="password" id="password" class="password" placeholder="密码">
+            <div class="login_error">用户名或密码错误</div>
+            <button class="login" type="submit" onclick="loginSubmit()">登录</button>
+            <div class="error"><span>+</span></div>
+        </form>
+    </div>
+    <!-- Javascript -->
+    <script type="text/javascript" src="common/global.js"></script>
+    <script type="text/javascript" src="common/cache.js"></script>
+    <script src="../js/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../js/supersized.3.2.7.min.js"></script>
+    <script src="../js/supersized-init.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script type="text/javascript" src="../js/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="../js/angularjs/angular-resource.min.js"></script>
+    <script type="text/javascript" src="../js/angularjs/angular-cookie.min.js"></script>
+    <script type="text/javascript" src="common/login.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,61 @@
+<div id="page-content" class="single-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="breadcrumb">
+          <li><a href="javascript:void(0)" ui-sref="content.index">主页</a></li>
+          <li><a href="javascript:void(0)" ui-sref="content.cart">购物车</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="catbox">
+      <table id="cartTable" ng-show="cartModel.cartList.length">
+        <thead>
+          <tr>
+            <th class="checkbox checkbox-danger">
+                <input class="check-all check" type="checkbox" ng-click="cartModel.checkAll()" ng-model="cartModel.all"/><label class="check-all" for="check-all" style="font-weight:700;">全选</label></th>
+            <th>商品</th>
+            <th>颜色分类</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in cartModel.cartList">
+            <td class="checkbox checkbox-danger">
+              <input ng-model="item.check" class="check-one check styled" type="checkbox" name="payList" value="{{item.id}}"/>
+              <label for="checkbox{{item.id}}"></label></td>
+            <td class="goods"><a href="javascript:void(0);" ui-sref="content.product({name:item.productname})"><img ng-src="{{item.picture}}" alt=""/><span>{{item.productname}}</span></a></td>
+            <td class="goods-colors">{{item.colortype}}</td>
+            <td class="price">{{item.price |currency :"¥"}}</td>
+            <td class="count">
+              <div class="fl"><button class="btn-qty-minus" ng-click="cartModel.reduce($index,item.id)"></button></div>
+              <div class="fl"><input class="qty" type="text" ng-model="item.num" value="{{item.num}}" onkeydown="onlyNum();"></div>
+              <div class="fl"><button class="btn-qty-plus" ng-click="cartModel.add($index,item.id)"></button></div>
+            </td>
+            <td class="subtotal">{{(item.num)*(item.price) |currency :"¥"}}</td>
+            <td class="operation"><a href="javascript:void(0)" class="delete" ng-click="cartModel.deleteCart(item.id);cartModel.deleteModal();">删除</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty" ng-show="!cartModel.cartList.length">购物车空空如也，快去寻找宝贝！</div>
+      <div class="foot" id="foot">
+        <span class="fl select-all checkbox checkbox-danger">
+          <input type="checkbox" class="check-all check" ng-click="cartModel.checkAll()" ng-model="cartModel.all"/><label for="select-all">全选</label></span>
+        <a class="fl delete" href="javascript:void(0);" ng-click="cartModel.deleteAllCart()">清空购物车</a>
+        <div class="fr closing" ng-click="cartModel.pay()">结 算</div>
+        <input type="hidden" id="cartTotalPrice" />
+        <div class="fr total">合计：<span class="mo">{{cartModel.getAllSum()  |currency :"¥"}}</span></div>
+        <div class="fr selected">已选商品<span class="mo" id="seleted">{{cartModel.getNums()}}</span>件<span class="arrow up">︽</span><span class="arrow down">︾</span></div>
+        <div class="selected-view">
+          <div id="selectedViewList" class="clearfix">
+            <div><img src="../images/iphone-7plus.jpg"><span>取消选择</span></div>
+          </div>
+          <span class="arrow">◆<span>◆</span></span> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div cart-del-tpl></div>

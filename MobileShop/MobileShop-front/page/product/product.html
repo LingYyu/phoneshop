@@ -1,0 +1,137 @@
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="javascript:void(0)" ui-sref="content.index">首页</a></li>
+                    <li><a href="javascript:void(0)" ui-sref="content.category({productname:productModel.list.productname})">种类</a></li>
+                    <li>{{productModel.list.productname}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div id="main-content" class="col-md-12">
+                <div class="product">
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="tb-booth tb-pic tb-s310">
+                                <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" rel="{{productModel.list.picture}}" class="jqzoom" /></a>
+                            </div>
+                            <ul class="tb-thumb" id="thumblist">
+                                <li class="tb-selected">
+                                    <div class="tb-pic tb-s40">
+                                        <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" mid="{{productModel.list.picture}}" big="{{productModel.list.picture}}"></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tb-pic tb-s40">
+                                        <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" mid="{{productModel.list.picture}}" big="{{productModel.list.picture}}"></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tb-pic tb-s40">
+                                        <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" mid="{{productModel.list.picture}}" big="{{productModel.list.picture}}"></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tb-pic tb-s40">
+                                        <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" mid="{{productModel.list.picture}}" big="{{productModel.list.picture}}"></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tb-pic tb-s40">
+                                        <a href="javascript:void(0)"><img src="{{productModel.list.picture}}" mid="{{productModel.list.picture}}" big="{{productModel.list.picture}}"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <form class="form-horizontal showcase-form" role="form" name="insert_form" novalidate>
+                            <div class="caption">
+                                <div class="name">
+                                    <h3>{{productModel.list.name}}</h3></div>
+                                <div class="info">
+
+                                    <div class="price"><label>价格：</label><em id="price">{{productModel.list.minprice |currency :"¥"}}—{{productModel.list.maxprice |currency :"¥"}}</em></div>
+                                </div>
+
+                                <div class="options">
+                                    <dl>
+                                        <dt>机身颜色：</dt>
+                                        <dd>
+                                            <ul id="product-color">
+                                                <li class="product-color" ng-repeat="color in productModel.colorList" ng-click="productModel.checkColor(color.color)"><a href="javascript:void(0);"><span>{{color.color}}</span></a></li>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="product-ram">
+                                    <dl>
+                                        <dt>内存：</dt>
+                                        <dd>
+                                            <ul id="product-ram">
+                                                <li class="product-ram-li" ng-repeat="ram in productModel.typeList" ng-click="productModel.checkType(ram.type)"><a href="javascript:void(0);"><span>{{ram.type}}</span></a></li>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="product-qty">
+                                    <label class="fl">数量: </label>
+                                    <div class="fl"><button class="btn-qty-minus" ng-click="productModel.reduce()"></button></div>
+                                    <div class="fl"><input class="qty" type="text" ng-model="productModel.list.qty" value="{{productModel.list.qty}}" onkeydown="onlyNum();"></div>
+                                    <div class="fl"><button class="btn-qty-plus" ng-click="productModel.add()"></button></div>
+                                </div>
+                                <div class="stock" ng-repeat="stock in productModel.colorList | limitTo :1">库存：{{productModel.list.num}}</div>
+                                <div class="product-cart">
+                                    <button type="button" name="button" class="btn btn-cart" ng-click="productModel.insert()">加入购物车</button>
+                                    <button type="button" name="button" class="btn btn-cart" ng-click="productModel.pay()">立即购买</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="product-desc">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="javascript:void(0)">商品详情</a></li>
+                        <li><a href="javascript:void(0)">评论</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active">
+                            <img src="../images/logofooter.png" alt="" style="float:left">
+                            <h4>欢迎来到MobileShop选购心仪的手机</h4>
+                            <p>MobileShop为您提供时尚精品手机,用最低的价格买最好的手机,全场手机包邮,更有精美小礼物赠送,支持一年内保修,七天无理由退换货。</p>
+                            <img src="../images/detail.jpg" alt="" style="margin-left:55px;">
+                        </div>
+                        <div class="tab-pane fade">
+                            <div class="review-text">
+                                <p>您的支持是我们的动力,你的宝贵意见是我们的改进的方向</p>
+                            </div>
+                            <div class="review-form">
+                                <h4>写下你的评论</h4>
+                                <form name="form1" id="ff">
+                                    <label>
+                                        <span>用户名:</span>
+                                        <input type="text"  name="name" id="name" required>
+                                        </label>
+                                    <label>
+                                        <span>评论区：</span>
+                                        <textarea name="message" id="message"></textarea>
+                                    </label>
+                                    <div class="text-right">
+                                        <input class="btn btn-default" type="reset" name="reset" value="重置">
+                                        <input class="btn btn-default" type="submit" name="Submit" value="提交">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div choice-first-tpl></div>
+<div add-cart-tpl></div>
+<script type="text/javascript" src="../js/jquery.imagezoom.min.js"></script>

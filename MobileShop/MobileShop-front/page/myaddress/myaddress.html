@@ -1,0 +1,97 @@
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="javascript:void(0)" ui-sref="content.index">首页</a></li>
+                    <li><a href="javascript:void(0)" ui-sref="content.account">我的账户</a></li>
+                    <li><a href="javascript:void(0)" ui-sref="content.myaddress">收货地址</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="address-nav col-sm-2">
+                <div class="address-nav-header">
+                    <img src="../images/header.jpg" alt="" id="addressMaterial">
+                </div>
+                <div class="address-nav-content">
+                    <span><a href="javascript:void(0)" ui-sref="content.mynews">个人资料</a></span>
+                </div>
+                <div class="address-nav-content">
+                    <span><a href="javascript:void(0)" ui-sref="content.myaddress">收货地址</a></span>
+                </div>
+            </div>
+            <div class="address-content col-sm-10">
+                <div class="address-content-title">
+                    <span>新增收货地址</span></div>
+                <form class="form-horizontal showcase-form" name="address_form" novalidate ng-submit="myaddressModel.saveAddList()">
+                    <div class="address-content-detail">
+                        <div class="myaddress">
+                            <form class="form-inline">
+                                <div data-toggle="distpicker">
+                                    <label class="product-address-city fl" for=""> 所在地区: <span>*</span></label>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="province2">Province</label>
+                                        <select name="province"  ng-model="myaddressModel.addList.province" class="form-control" id="province2" data-province="---- 选择省 ----"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="city2">City</label>
+                                        <select  name="city"  ng-model="myaddressModel.addList.city" class="form-control" id="city2" data-city="---- 选择市 ----"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="district2">District</label>
+                                        <select  name="district"  ng-model="myaddressModel.addList.district" class="form-control" id="district2" data-district="---- 选择区 ----"></select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="detailAddress">
+                            <label>详细地址: <span>*</span></label>
+                             <textarea name="address" rows="4" cols="78" ng-model="myaddressModel.addList.address" placeholder="建议您如实填写详细地址，例如街道名称，门牌号码，楼层及房间号等信息" required></textarea>
+                          </div>
+                        <div class="youbian"><label for="">邮编地址：</label>
+                            <input type="text" name="yb" value="" ng-model="myaddressModel.addList.yb" ng-pattern="/^[0-9]{6}$/" placeholder="输入6位数的邮编" maxlength="6"></div>
+                        <div class="address-name"><label for="">收货人姓名：<span>*</span></label>
+                            <input type="text" name="name" value="" ng-model="myaddressModel.addList.name" required></div>
+                        <div class="address-phone">
+                          <label for="">电话号码：<span>*</span></label>
+                            <input type="text" ng-model="myaddressModel.addList.phone" name="phone" value="" ng-pattern="/^(13[0-9]{9})|(15[0-9]{9})|(18[0-9]{9}$)/" maxlength="11" required>
+                              <span ng-show="address_form.phone.$dirty && address_form.phone.$invalid">
+                                电话号码格式不正确</span>
+                          </div>
+                        <div class="address-save">
+                            <button type="submit" name="button">保存</button></div>
+                    </div>
+                </form>
+            </div>
+            <div class="address-saved col-sm-10">
+                <label>
+                    已保存的地址
+                </label>
+                <table>
+                    <thead>
+                        <th>收货人</th>
+                        <th>所在地区</th>
+                        <th>详细地址</th>
+                        <th>邮编</th>
+                        <th>电话号码</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="myaddress in myaddressModel.queryList track by $index">
+                            <td>{{myaddress.name}}</td>
+                            <td>{{myaddress.city}}</td>
+                            <td>{{myaddress.address}}</td>
+                            <td>{{myaddress.yb}}</td>
+                            <td>{{myaddress.phone}}</td>
+                            <td><a href="javascript:void(0)" class="delete" ng-click="myaddressModel.deleteAddress(myaddress.id)">删除</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/distpicker.data.js"></script>
+<script src="../js/distpicker.js"></script>

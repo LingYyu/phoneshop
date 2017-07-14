@@ -1,0 +1,33 @@
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="javascript:void(0)" ui-sref="content.index">首页</a></li>
+                    <li><a href="javascript:void(0)">主打商品</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div id="main-content" class="col-md-12">
+                <div class="row">
+                    <div class="products">
+                        <div class="col-md-3" ng-repeat="product in leadingModel.leading">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="javascript:void(0)" ui-sref="content.product({name:product.name})" ui-sref-opts="{reload:true}"><img class="leading" ng-src="{{product.picture}}" /></a>
+                                </div>
+                                <div class="caption">
+                                    <div class="name">
+                                        <h3><a href="javascript:void(0)" ui-sref="content.product">{{product.name}}</a></h3></div>
+                                    <div class="">{{product.price |currency :"¥"}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div pagination model="leadingModel" method="queryLeading" querymethod=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

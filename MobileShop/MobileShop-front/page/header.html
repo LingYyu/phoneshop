@@ -1,0 +1,196 @@
+<nav id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+              <ul class="top-link">
+                 <li><span>欢迎来到MobileShop!</span></li>
+                 <li><a href="javascript:void(0)" ng-click="loginModel.loginAddOpenModal()"><span class="header_login" id="before_login">请先登录</span></a></li>
+                 <li><a href="javascript:void(0)" ng-click="regModel.regAddOpenModal()"><span class="header_login" id="before_reg">免费注册</span></a></li>
+                 <li class="dropdown"><a href="javascript:void(0);" ui-sref="content.account"><span class="header_login " id="after_login"></span></a></li>
+                 <li><a href="javascript:void(0)"><span class="fade" id="exit" ng-click="loginModel.exitLogin()">退出</span></a></li>
+             </ul>
+            </div>
+            <div class="col-xs-6">
+                <ul class="top-link">
+                    <li><a href="javascript:void(0)" ui-sref="content.myorder"><span class="glyphicon glyphicon-list-alt"></span>我的订单</a></li>
+                    <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-star"></span>收藏夹</a></li>
+                    <li><a href="javascript:void(0)">联系客服</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<header class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="logo"><img src="../images/logo.png" /></div>
+        </div>
+        <div class="col-md-6">
+            <form class="form-search">
+                <input type="text" class="input-medium search-query" ng-model="searchModel.searchList.name">
+                <button type="submit" class="btn" ui-sref="content.search({name:searchModel.searchList.name})" ng-click="searchModel.search()"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <div id="cart">
+                <a class="btn btn-1" href="javascript:void(0);" ui-sref="content.cart"  ui-sref-opts="{reload:true}">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>我的购物车
+                    <div class="read-cart" ng-show="cartCountModel.cartCount.length">{{cartCountModel.cartCount.length}}</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<nav id="menu" class="navbar">
+    <div class="container">
+        <div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
+            <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav" id="index_header">
+                <li><a href="javascript:void(0)" ui-sref="content.index">首页</a></li>
+                <li class="dropdown"><a href="javascript:void(0)">手机种类</a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner" ng-repeat="name in productMenuModel.menu">
+                            <ul class="list-unstyled" ng-repeat="product in name">
+                                <li><a href="javascript:void(0)" ui-sref="content.category({productname:product})" ui-sref-opts="{reload:true}">{{product}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0)" ui-sref="content.allphone({name:allphoneModel.list.name})">手机社区</a></li>
+            </ul>
+            <ul class="nav navbar-nav" id="account_header">
+                <li>
+                    <a href="javascript:void(0)" ui-sref="content.index">
+                        <div class="header-img"></div>
+                    </a>
+                </li>
+                <li><a href="javascript:void(0)" ui-sref="content.account">首页</a></li>
+                <li class="dropdown"><a href="javascript:void(0)">账户设置</a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <ul class="list-unstyled">
+                                <li><a href="javascript:void(0)" ui-sref="content.mynews">个人资料</a></li>
+                                <li><a href="javascript:void(0)" ui-sref="content.myaddress">收货地址</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0)" ui-sref="content.myorder">消息</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="modal_div fade" id="login" data-backdrop="static">
+    <div class="modal_con">
+        <div class="modal_header">
+            <div class="modal_title">登录</div>
+            <a href="javascript:void(0)" class="close_login" ng-click="loginModel.closeLoginModal()"><i class="icon_close"></i></a>
+        </div>
+        <div class="modal_body">
+            <div>
+                <form class="form-horizontal showcase-form" role="form" name="login_form" novalidate ng-submit="loginModel.login();">
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-7">
+                            <input type="email" name="email" ng-model="loginModel.info.email" class="form-control" placeholder="输入邮箱" autocomplete="off" required>
+                        </div>
+                        <div class="error" ng-show="login_form.email.$dirty && login_form.email.$invalid">
+                            请输入正确用户名
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="password" name="user_password" ng-model="loginModel.info.password" ng-minlength="6" ng-maxlength="20" placeholder="输入密码6-20个字符" required>
+                        </div>
+                        <div class="error" ng-show="login_form.user_password.$dirty && login_form.user_password.$invalid">
+                            请输入6-20位密码
+                        </div>
+                    </div>
+                    <div id="login_error" class="error"><span>用户名或密码错误</span></div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3">
+                            <button type="submit" class="btn col-sm-9 btn_login" ng-disabled="login_form.$invalid">登录</button>
+                        </div>
+                    </div>
+                    <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#reg">没有账号，注册一个</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal_div fade" id="reg" data-backdrop="static">
+    <div class="modal_con">
+        <div class="modal_header">
+            <div class="modal_title">注册</div>
+            <a href="javascript:void(0)" class="close_login" ng-click="regModel.closeRegModal()"><i class="icon_close"></i></a>
+        </div>
+        <div class="modal_body">
+            <div>
+                <form class="form-horizontal showcase-form" role="form" name="reg_form" novalidate ng-submit="regModel.reg();">
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">登录名<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="email" name="email" ng-model="regModel.regList.email" class="form-control" placeholder="输入邮箱" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">昵称</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" name="nick" ng-model="regModel.regList.nick" ng-pattern="/^([\u4e00-\u9fa5a-zA-Z]+[0-9]*)/" placeholder="不能包含./,$%@#*&等特殊字符">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">真实姓名<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" name="truename" ng-model="regModel.regList.truename"  placeholder="输入中文姓名或英文名" ng-pattern="/^[a-zA-Z\u4e00-\u9fa5 ]{1,20}$/" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">性别<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <div class="radio sex">
+                                <input id="radio1" type="radio" name="sex" ng-model="regModel.regList.sex" value="男">
+                                <label for="radio1">男</label>
+                            </div>
+                            <div class="radio sex">
+                                <input id="radio2" type="radio" name="sex" ng-model="regModel.regList.sex" value="女">
+                                <label for="radio2">女</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">生日<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <input class="form-control" id="date" type="text" name="birthday" ng-model="regModel.regList.birthday"  placeholder="yyyy-mm-dd" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">密码<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="password" name="password" ng-model="regModel.regList.password" ng-minlength="6" ng-maxlength="20" placeholder="输入密码6-20个字符" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">重复密码<span class="red">*</span></label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="password" name="repassword" ng-model="regModel.regList.repassword" ng-minlength="6" ng-maxlength="20" placeholder="再次输入密码" required>
+                        </div>
+                        <div class="error" ng-show="reg_form.password.$dirty && reg_form.repassword.$dirty">
+                            <span ng-if="regModel.regList.password != regModel.regList.repassword">两次密码不一致</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3">
+                            <button type="submit" class="btn col-sm-9 btn_login" ng-disabled="reg_form.$invalid || regModel.regList.password != regModel.regList.repassword">注册</button>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#login">已有账号--&gt;直接登录</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

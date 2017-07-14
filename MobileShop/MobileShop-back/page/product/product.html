@@ -1,0 +1,104 @@
+<div class="col-sm-12">
+    <div class="col-sm-2">
+        <div class="menu">
+            <ul>
+                <li class="shop_control"><span class="santiaogang">≡</span><span>商品管理</span></li>
+                <li class="sale"><a href="javascript:void(0)" ng-click="productModel.showOnsale()">待售商品管理</a></li>
+                <li class="unsale"><a href="javascript:void(0)" ng-click="productModel.showUnsale()">在售商品管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="detail">
+            <div class="detail_header">
+                <span>商品列表</span>
+            </div>
+            <div class="detail_body" id="onsales">
+                <div class="detail_add">
+                      <button id="add" class="btn btn-add" type="button"
+                       name="button" ng-click="productModel.productAddOpenModal();">添加</button>
+                </div>
+                <div class="table-responsive detail_table" ng-show="productModel.unsales.length">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>商品名称</th>
+                                <th>商品图片</th>
+                                <th>商品价格</th>
+                                <th>商品数量</th>
+                                <th>编辑</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="unsales in productModel.unsales">
+                            <td>{{$index+1}}</td>
+                            <td>{{unsales.name}}</td>
+                            <td>
+                                <div class="detail-picture">
+                                    <img ng-src="{{unsales.picture}}" alt="">
+                                </div>
+                            </td>
+                            <td>{{unsales.price |currency :"¥"}}</td>
+                            <td>{{unsales.num}}</td>
+                            <td>
+                                <a href="#">
+                                    <div class="table-edit"></div>
+                                </a>
+                            </td>
+                            <td><div class="product_xiajia">
+                          <button type="button" name="button" class="btn btn-xiajia" ng-click="productModel.up(unsales.id)">上架</button>
+                        </div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="daishou" ng-show="!productModel.unsales.length">
+                    无待售商品,请先添加！
+                </div>
+            </div>
+            <div id="unsales">
+              <div class="table-responsive detail_table" ng-show="productModel.onsales.length">
+                  <table class="table text-center">
+                      <thead>
+                          <tr>
+                              <th>序号</th>
+                              <th>商品名称</th>
+                              <th>商品图片</th>
+                              <th>商品价格</th>
+                              <th>商品数量</th>
+                              <th>编辑</th>
+                              <th>状态</th>
+                          </tr>
+                      </thead>
+                      <tr ng-repeat="onsale in productModel.onsales">
+                          <td>{{$index+1}}</td>
+                          <td>{{onsale.name}}</td>
+                          <td>
+                              <div class="detail-picture">
+                                  <img ng-src="{{onsale.picture}}" alt="">
+                              </div>
+                          </td>
+                          <td>{{onsale.price |currency :"¥"}}</td>
+                          <td>{{onsale.num}}</td>
+                          <td>
+                              <a href="#">
+                                  <div class="table-edit"></div>
+                              </a>
+                          </td>
+                          <td><div class="product_xiajia">
+                        <button type="button" name="button" class="btn btn-xiajia" ng-click="productModel.down(onsale.id)">下架</button>
+                      </div></td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="daishou" ng-show="!productModel.onsales.length">
+                  无在售商品,请先在待售商品列表中把商品上架！
+              </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div product-add-tpl></div>
+<div product-del-tpl></div>
+<div add-success-tpl></div>

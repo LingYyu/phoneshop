@@ -1,0 +1,135 @@
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div id="main-content" class="col-md-12">
+                <div class="ship_address">
+                    <div class="check_address">
+                        确认收货地址
+                    </div>
+                    <div class="pay_address">
+                        <div class="check_pay_address" ng-repeat="address in payModel.address" ng-click="payModel.checkAddress(address.address,address.city,address.name,address.phone)">
+                          {{address.city+address.address}}
+                          ({{address.name}}收){{address.phone}}
+                        </div>
+                    </div>
+                    <div class="order_showAdd_error" ng-show="!payModel.address.length">
+                        未添加地址！请先添加地址！
+                    </div>
+                    <div class="add_address">
+                        <button ng-click="payModel.showNewAddress()"><img src="../images/add.png" alt=""><span>使用新地址</span></button>
+                    </div>
+                </div>
+                <div class="order_message">
+                    <div class="check_order">
+                        确认订单信息
+                    </div>
+                    <div class=""  ng-repeat="pay in payModel.orderList  | limitTo :1">
+                    订单编号：{{pay.orderid}}
+                    创建时间：{{pay.ordertime}}
+                    </div>
+                    <div class="orderbox">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>商品</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>优惠方式</th>
+                                    <th>小计</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="item" ng-repeat="pay in payModel.orderList">
+                                    <td><img ng-src="{{pay.picture}}" alt="">{{pay.name}} {{pay.producttype}} </td>
+                                    <td>{{pay.price}}</td>
+                                    <td>{{pay.num}}</td>
+                                    <td>无优惠</td>
+                                    <td>{{(pay.price)*(pay.num)}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="orderC">
+                                            <div class="order_check">
+                                                <div class="order_ceh">
+                                                    <div class="order_pay" ng-repeat="pay in payModel.orderList  | limitTo :1">
+                                                        实付款:{{payModel.getSum()}}
+                                                    </div>
+                                                    <div class="order_address">
+                                                        <ul>
+                                                            <li>寄送至:{{payModel.clickAddress.city+payModel.clickAddress.address}}</li>
+                                                            <li>收货人:{{payModel.clickAddress.name}} {{payModel.clickAddress.phone}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order_check_button">
+                                                <button type="button" name="button" ng-click="payModel.updateOrder()">提交订单</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div pay-success-tpl></div>
+<div add-remind-tpl></div>
+<div class="modal_div fade" id="new_address" data-backdrop="static">
+    <div class="modal_con">
+        <div class="modal_header">
+            <div class="modal_title">添加新地址</div>
+            <a href="javascript:void(0)" class="close_login" data-dismiss="modal"><i class="icon_close"></i></a>
+        </div>
+        <div class="modal_body">
+            <div>
+              <form class="form-horizontal showcase-form" name="address_form" novalidate ng-submit="payModel.saveAddList()">
+                  <div class="myaddress-content-detail">
+                      <div class="mynewaddress">
+                          <form class="form-inline">
+                              <div data-toggle="distpicker">
+                                  <label class="product-address-city fl" for=""> 所在地区: <span>*</span></label>
+                                  <div class="form-group">
+                                      <label class="sr-only" for="province2">Province</label>
+                                      <select name="province"  ng-model="payModel.addList.province" class="form-control" id="province2" data-province="---- 选择省 ----"></select>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="sr-only" for="city2">City</label>
+                                      <select  name="city"  ng-model="payModel.addList.city" class="form-control" id="city2" data-city="---- 选择市 ----"></select>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="sr-only" for="district2">District</label>
+                                      <select  name="district"  ng-model="payModel.addList.district" class="form-control" id="district2" data-district="---- 选择区 ----"></select>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="detailAddress">
+                          <label>详细地址: <span>*</span></label>
+                           <textarea name="address" rows="4" cols="50" ng-model="payModel.addList.address" placeholder="建议您如实填写详细地址，例如街道名称，门牌号码，楼层及房间号等信息" required></textarea>
+                        </div>
+                      <div class="youbian fl"><label for="">邮编地址:</label>
+                          <input type="text" name="yb" value="" ng-model="payModel.addList.yb" ng-pattern="/^[0-9]{6}$/" placeholder="输入6位数的邮编" maxlength="6"></div>
+                      <div class="address-name fl"><label for="">收货人姓名:<span>*</span></label>
+                          <input type="text" name="name" value="" ng-model="payModel.addList.name" required></div>
+                      <div class="address-phone fl">
+                        <label for="">电话号码:<span>*</span></label>
+                          <input type="text" ng-model="payModel.addList.phone" name="phone" value="" ng-pattern="/^(13[0-9]{9})|(15[0-9]{9})|(18[0-9]{9}$)/" maxlength="11" required>
+                            <span ng-show="address_form.phone.$dirty && address_form.phone.$invalid">
+                              电话号码格式不正确</span>
+                        </div>
+                      <div class="newaddress_save fl">
+                          <button class="btn btn_login" type="submit" name="button" ng-disabled="address_form.$invalid">保存</button></div>
+                  </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/distpicker.data.js"></script>
+<script src="../js/distpicker.js"></script>

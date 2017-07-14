@@ -1,0 +1,132 @@
+<div id="page-content" class="home-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators hidden-xs">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="first_slide"></div>
+                        </div>
+                        <div class="item">
+                            <div class="second_slide"></div>
+                        </div>
+                        <div class="item">
+                            <div class="third_slide"></div>
+                        </div>
+                        <div class="item">
+                            <div class="fourth_slide"></div>
+                        </div>
+                        <div class="item">
+                            <div class="fifth_slide"></div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="banner">
+                <div class="col-sm-4">
+                    <div class="sub_banner1">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="sub_banner2">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="sub_banner3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>特价商品</h2>   <p class="more fr" ng-repeat="sales in indexModel.sales | limitTo :1"><a href="javascript:void(0);" ui-sref="content.sales({sales:sales.sales})" ui-sref-opts="{reload:true}">更多&gt;&gt;</a></p>
+                </div>
+                <div class="latest-product">
+                    <div class="product-carousel">
+                        <div class="single-product" ng-repeat="sales in indexModel.sales | limitTo : 5">
+                            <div class="product-f-image">
+                                <img ng-src="{{sales.picture}}" alt="">
+                                <div class="product-hover">
+                                    <a href="javascript:void(0);" ui-sref="content.similar({productid:sales.productid})" ui-sref-opts="{reload:true}" class="add-to-cart-link"><span class="glyphicon glyphicon-heart"></span>相似宝贝</a>
+                                    <a href="javascript:void(0);" ui-sref="content.product({name:sales.name})" ui-sref-opts="{reload:true}" class="view-details-link"><i class="fa fa-link"></i>查看详情</a>
+                                </div>
+                            </div>
+
+                            <h2><a href="#/product">{{sales.name}}</a></h2>
+
+                            <div class="product-carousel-price">
+                                <ins><em>{{sales.price |currency :"¥"}}</em></ins> <del>{{sales.price+300 |currency :"¥"}}</del>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hide" pagination model="indexModel" method="querySales" querymethod=""></div>
+        </div>
+        <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo1">
+                        <i class="fa fa-refresh"></i>
+                        <p>30天退换货</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo2">
+                        <i class="fa fa-truck"></i>
+                        <p>免费送货</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo3">
+                        <i class="fa fa-lock"></i>
+                        <p>安全支付</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo4">
+                        <i class="fa fa-gift"></i>
+                        <p>全新产品</p>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading">
+                    <h2>主打商品</h2> <p class="more fr" ng-repeat="leading in indexModel.leading | limitTo :1"><a href="javascript:void(0);" ui-sref="content.leading({sales:leading.sales})" ui-sref-opts="{reload:true}">更多&gt;&gt;</a></p></div>
+                <div class="products">
+                    <div class="col-lg-3 col-sm-3 col-sm-6 col-xs-12" ng-repeat="leading in indexModel.leading | limitTo : 4">
+                        <div class="product">
+                            <div class="image">
+                                <a href="javascript:void(0);" ui-sref="content.product({name:leading.name})" ui-sref-opts="{reload:true}"><img class="leading" ng-src="{{leading.picture}}" /></a>
+                            </div>
+                            <div class="caption">
+                                <div class="name">
+                                    <h3><a href="javascript:void(0);" ui-sref="content.product({name:leading.name})" ui-sref-opts="{reload:true}">{{leading.name}}</a></h3></div>
+                                <div class="">{{leading.price |currency :"¥"}}</div>
+                                <div class="rating">
+                                  <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hide" pagination model="indexModel" method="queryLeading" querymethod=""></div>
+            </div>
+        </div>
+    </div>
+</div>

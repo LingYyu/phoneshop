@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  <generatorConfiguration>
+      <!--数据库驱动  如果版本不同别忘记换-->
+      <classPathEntry    location="D:\maven-repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/>
+      <context id="DB2Tables" targetRuntime="MyBatis3">
+          <commentGenerator>
+             <property name="suppressDate" value="true"/>
+             <property name="suppressAllComments" value="true"/>
+         </commentGenerator>
+         <!--数据库链接地址账号密码  数据库名和用户名密码-->
+         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+	connectionURL="jdbc:mysql://localhost:3306/phoneshop" userId="root"
+	password="root">
+         </jdbcConnection>
+         <javaTypeResolver>
+             <property name="forceBigDecimals" value="false"/>
+         </javaTypeResolver>
+         <!--生成Model类存放位置   我放在了F盘org文件夹下的src1下  他会在其下面生成lcw文件夹然后再lcw文件夹下生成model文件夹在model文件夹下生成user类-->
+         <javaModelGenerator targetPackage="com.newtouch.fbf.entity" targetProject="src\main\java">
+             <property name="enableSubPackages" value="true"/>
+             <property name="trimStrings" value="true"/>
+         </javaModelGenerator>
+         <!--生成映射文件存放位置  我放在了F盘org文件夹下的src1下  他会在其下面生成lcw文件夹然后再lcw文件夹下生成mapping文件夹在mapping文件夹下生成userMapper.xml -->
+         <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources">
+             <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置    我放在了F盘org文件夹下的src1下  他会在其下面生成lcw文件夹然后再lcw文件夹下生成dao文件夹在dao文件夹下生成userMapper类-->
+         <javaClientGenerator type="XMLMAPPER" targetPackage="com.newtouch.fbf.dao" targetProject="src\main\java">
+             <property name="enableSubPackages" value="true"/>
+         </javaClientGenerator>
+         <!--生成对应表及类名-->
+         <table tableName="t_user" domainObjectName="TUser"/>
+        <table tableName="t_productmenu" domainObjectName="Productmenu"/>
+        <table tableName="t_product" domainObjectName="Product"/>
+        <table tableName="t_personal" domainObjectName="TPersonal"/>
+        <table tableName="t_user_address" domainObjectName="TUserAddress"/>
+        <table tableName="t_user_order" domainObjectName="TUserOrder"/>
+        <table tableName="t_cart" domainObjectName="TCart"/> 
+        <table tableName="t_productcolor" domainObjectName="TProductcolor"/> 
+        <table tableName="t_producttype" domainObjectName="TProducttype"/> 
+     </context>
+ </generatorConfiguration>

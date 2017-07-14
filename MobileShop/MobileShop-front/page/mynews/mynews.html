@@ -1,0 +1,81 @@
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="javascript:void(0)" ui-sref="content.index">首页</a></li>
+                    <li><a href="javascript:void(0)" ui-sref="content.account">我的账户</a></li>
+                    <li><a href="javascript:void(0)" ui-sref="content.mynews">个人资料</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="account_main">
+                <div class="mebox">
+                  <div class="col-sm-2 mynews-nav">
+                    <div class="mynews-nav-title">
+                      账户设置
+                    </div>
+                    <div class="mynews-nav-content">
+                      <span><a href="javascript:void(0)" ui-sref="content.mynews">个人资料</a></span>
+                      </div>
+                      <div class="mynews-nav-content">
+                      <span><a href="javascript:void(0)" ui-sref="content.myaddress">收货地址</a></span>
+                      </div>
+                  </div>
+                    <div class="mebox2 active col-sm-7">
+                        <form class="form-horizontal showcase-form xcont" name="person_form" >
+                            <div class="account-control-group" style="height: 120px;">
+                                <label class="account-control-label">头像:</label>
+                                <div class="account-controls">
+                                    <div>
+                                        <img src="../images/header.jpg" class="mg-rounded-disc center-block" alt="..."id="addressMaterial">
+                                        <input name="picture" type="file" id="P1" class="hidden" accept="image/jpeg,image/png" onchange="fileChange(this)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="account-control-group">
+                                <label class="account-control-label">密码:</label>
+                                <div class="account-controls">
+                                    <input name="password" ng-model="mynewsModel.mynewsList.password" ng-minlength="6" ng-maxlength="20" id="password" type="password"  placeholder="必填项" class="input-xlarge" required>
+                                </div>
+                            </div>
+                            <div class="account-control-group">
+                                <label class="account-control-label">确认密码:</label>
+                                <div class="account-controls">
+                                    <input name="repassword" ng-model="mynewsModel.mynewsList.repassword" ng-minlength="6" ng-maxlength="20" id="repassword" type="password" placeholder="必填项" class="input-xlarge" required>
+                                </div>
+                            </div>
+                            <div class="error" style="margin-top: -71px;margin-left: 267px;" ng-show="person_form.password.$dirty && person_form.repassword.$dirty">
+                                <span ng-if="mynewsModel.mynewsList.password != mynewsModel.mynewsList.repassword">两次密码不一致</span>
+                            </div>
+
+                            <div class="account-control-group" id="news_nick">
+                                <label class="account-control-label">昵称:</label>
+                                <div class="account-controls">
+                                    <input name="nick" id="nick" type="text"  class="input-xlarge" required>
+                                </div>
+                            </div>
+
+                            <div class="account-control-group" id="news_truename">
+                                <label class="account-control-label">姓名:</label>
+                                <div class="account-controls">
+                                    <input name="truename" id="truename" type="text" class="input-xlarge" required>
+                                </div>
+                            </div>
+                            <div class="account-control-group" id="news_birthday">
+                                <label class="account-control-label">生日:</label>
+                                <div class="account-controls">
+                                    <input id="date1" name="birthday" type="text"  placeholder="yyyy-mm-dd" required>
+                                </div>
+                            </div>
+                            <div class="address-save form-group">
+                                <button class="btn" type="submit" ng-click="mynewsModel.saveList()" ng-disabled="person_form.$invalid || mynewsModel.mynewsList.password != mynewsModel.mynewsList.repassword">保存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

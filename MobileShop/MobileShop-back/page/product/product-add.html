@@ -1,0 +1,75 @@
+<div class="modal fade" id="product_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <i class="icon_close fr" data-dismiss="modal"></i>
+        <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+      </div>
+      <div class="modal-body">
+		<form name="add_product">
+                    <div class="modal_add_product">
+                        <div class="product_type">
+                            <label for="">商品类型：</label>
+                            <select class="form-control" name="name" id="name">
+                                  <option value="苹果">苹果</option>
+                                  <option value="三星">三星</option>
+                                  <option value="小米">小米</option>
+                                  <option value="华为">华为</option>
+                                  <option value="oppo">oppo</option>
+                                  <option value="苹果">苹果</option>
+                                  <option value="魅族">魅族</option>
+                                  <option value="VIVO">VIVO</option>
+                                  <option value="LG">LG</option>
+                            </select>
+                        </div>
+                        <div class="product_type">
+                            <label for="">商品分类：</label>
+                            <select class="form-control" name="sales" id="sales">
+                                <option value="主打商品">主打商品</option>
+                                <option value="特价商品">特价商品</option>
+                                <option value="普通商品">普通商品</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品名称：</label>
+                        <input type="text" name="" id="productname" value="" class="add_product form-control">
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品图片：</label>
+                        <input type="file" name="P1" id="P1" value="">
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品颜色：</label>
+                        <input class="check_color" id="color" name="color" type="checkbox" value="金色">金色
+                        <input type="checkbox"  id="color" name="color" value="黑色">黑色
+                        <input type="checkbox" id="color" name="color" value="玫瑰金">玫瑰金
+                        <input type="checkbox" id="color" name="color" value="白色">白色
+                        <input type="checkbox" id="color" name="color" value="亮黑色">亮黑色
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品内存：</label>
+                        <input class="check_ram" id="type" name="type" type="checkbox" value="16g">16g
+                        <input type="checkbox" id="type" name="type" value="32g">32g
+                        <input type="checkbox" id="type" name="type" value="64g">64g
+                        <input type="checkbox" id="type" name="type" value="128g">128g
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品价格：</label>
+                        <input type="text" name=""  id="price" value="" class="form-control add_product">
+                    </div>
+                    <div class="modal_add_product">
+                        <label for="">商品数量：</label>
+                        <input type="text" name="" id="qty" value="" class="form-control add_product">
+                    </div>
+
+                </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-save" onclick="saveSubmit()">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="page">
+	<div class="ep_pages">
+        <ul class="pagination">
+            <li ng-class="{true:'disabled'}[currentPage == 1]">
+                <a href="javascript:void(0)" ng-click="prev();">&laquo;</a>
+            </li>
+            <li ng-repeat="page in pages" ng-class="{true:'active', false:''}[currentPage == page]">
+                <a href="javascript:void(0)" ng-click="getData(page)">{{page}}</a>
+            </li>
+            <li class="last" ng-class="{true:'disabled'}[currentPage == totalPage]">
+                <a href="javascript:void(0);" ng-click="next();">&raquo;</a>
+            </li>
+            <div class="page_search">
+                <span>到</span>
+                    <input type="text" class="" ng-model="specifiedPage"/>
+                <span>页</span>
+                <a class="btn gradient" ng-click="customerPage();">GO</a>
+            </div>
+        </ul>
+    </div>
+    <div class="page_choice">
+        <div class="page_choice_frame">
+            <label>每页显示</label>
+            <select class="form-control" >
+                <option ng-repeat="size in pageSizeList track by $index" value="{{size}}" >{{size}}</option>
+            </select>
+            <label>条，</label>
+        </div>
+        <div class="page_choice_strip">
+            <label>共</label>
+            <span>{{totalRecords}}</span>
+            <label>条记录，第</label>
+            <span>{{currentPage}}</span>
+            <label>页</label>
+        </div>
+    </div>
+</div>
